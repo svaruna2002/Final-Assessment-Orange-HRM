@@ -13,7 +13,6 @@ def pytest_addoption(parser):
 
 @pytest.fixture(scope="class")
 def setup(request):
-    global driver
     browser_name = request.config.getoption("browser_name")
     if browser_name == "firefox":
         driver = webdriver.Firefox()
@@ -23,7 +22,7 @@ def setup(request):
         driver = webdriver.Edge()
     driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
     driver.maximize_window()
-    time.sleep(5)
+    time.sleep(10)
     driver.find_element(By.NAME, "username").send_keys("Admin")
     driver.find_element(By.CSS_SELECTOR, ".oxd-input.oxd-input--active").send_keys("admin123")
     driver.find_element(By.CSS_SELECTOR, "button[type='submit']").click()
